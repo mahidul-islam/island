@@ -17,7 +17,7 @@ class HomeView extends GetView<HomeController> {
           children: [
             FloatingActionButton(
               onPressed: () {
-                Get.offAndToNamed(Routes.PARABOLA);
+                Get.toNamed(Routes.PARABOLA);
               },
               child: const Icon(Icons.skip_next_rounded),
             ),

@@ -17,7 +17,7 @@ class ParabolaView extends GetView<ParabolaController> {
             children: [
               FloatingActionButton(
                 onPressed: () {
-                  Get.toNamed(Routes.HOME);
+                  Get.back();
                 },
                 child: const Icon(Icons.skip_previous_rounded),
               ),
