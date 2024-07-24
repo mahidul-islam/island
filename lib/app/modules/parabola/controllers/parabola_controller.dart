@@ -72,19 +72,19 @@ class ParabolaController extends GetxController {
             .toDouble() /
         1000;
 
-    print('$timeInSeconds, '); //$timeFromTick
+    // print('$timeInSeconds, '); //$timeFromTick
 
     timeInSeconds = timeInSeconds * simulationSpeed.value;
 
     double radian = angle.value * (pi / 180);
 
-    x.value = (initialVelocity.value * cos(radian)) * timeInSeconds;
+    x.value = initialVelocity.value * cos(radian) * timeInSeconds;
 
     double b = tan(radian);
-    double c = (9.80665) /
+    double c = 9.80665 /
         (2 *
-            ((initialVelocity.value * initialVelocity.value) *
-                (cos(radian) * cos(radian))));
+            (initialVelocity.value * initialVelocity.value) *
+            (cos(radian) * cos(radian)));
 
     y.value = (b * x.value) - (c * (x.value * x.value));
 
@@ -98,7 +98,7 @@ class ParabolaController extends GetxController {
     final double currentRadian = atan((speedY.value / speedX.value));
     currentAngle.value = currentRadian * (pi / 180);
 
-    print('time: $timeInSeconds x: ${x.value},y: ${y.value}');
+    // print('time: $timeInSeconds x: ${x.value},y: ${y.value}');
   }
 
   @override

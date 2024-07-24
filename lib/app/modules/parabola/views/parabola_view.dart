@@ -104,7 +104,7 @@ class ParabolaView extends GetView<ParabolaController> {
                             ),
                             Expanded(
                               child: Slider(
-                                max: 1,
+                                max: 5,
                                 min: 0.001,
                                 value: controller.simulationSpeed.value,
                                 onChanged: controller.onSpeedSliderChange,
