@@ -104,7 +104,7 @@ class ParabolaView extends GetView<ParabolaController> {
                             ),
                             Expanded(
                               child: Slider(
-                                max: 3,
+                                max: 1,
                                 min: 0.001,
                                 value: controller.speed.value,
                                 onChanged: controller.onSpeedSliderChange,
@@ -122,9 +122,12 @@ class ParabolaView extends GetView<ParabolaController> {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(30),
+                  margin: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    color: Colors.lightGreenAccent.withOpacity(0.2),
+                  ),
                   width: Get.width,
-                  color: Colors.lightGreenAccent.withOpacity(0.2),
                   child: Stack(
                     children: [
                       Positioned(

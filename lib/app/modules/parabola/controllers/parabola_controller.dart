@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 class ParabolaController extends GetxController {
   final count = 0.obs;
 
-  final RxDouble velocity = 100.0.obs;
+  final RxDouble velocity = 140.0.obs;
   final RxDouble angle = 45.0.obs;
-  final RxDouble speed = 1.0.obs;
+  final RxDouble speed = 0.5.obs;
 
   final RxInt tickCount = 0.obs;
   final RxBool isPlaying = false.obs;
