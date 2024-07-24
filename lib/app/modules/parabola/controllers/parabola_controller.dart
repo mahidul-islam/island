@@ -7,9 +7,9 @@ class ParabolaController extends GetxController {
 
   final RxDouble velocity = 100.0.obs;
   final RxDouble angle = 45.0.obs;
+  final RxDouble speed = 1.0.obs;
 
   final RxInt tickCount = 0.obs;
-
   final RxBool isPlaying = false.obs;
 
   final RxDouble x = 0.0.obs;
@@ -28,6 +28,10 @@ class ParabolaController extends GetxController {
 
   void onAngleSliderChange(double a) {
     angle.value = a;
+  }
+
+  void onSpeedSliderChange(double s) {
+    speed.value = s;
   }
 
   @override
@@ -52,7 +56,7 @@ class ParabolaController extends GetxController {
     double time =
         ((timer.tick - tickCount.value) * (1000 ~/ 60)).toDouble() / 1000;
 
-    print(time);
+    time = time * speed.value;
 
     double radian = angle.value * (pi / 180);
 

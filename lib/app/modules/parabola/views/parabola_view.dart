@@ -94,8 +94,28 @@ class ParabolaView extends GetView<ParabolaController> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        width: Get.width * 2 / 3,
+                        child: Row(
+                          children: [
+                            const Text('Speed: '),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Slider(
+                                max: 3,
+                                min: 0.001,
+                                value: controller.speed.value,
+                                onChanged: controller.onSpeedSliderChange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Text(
-                          'Velocity: ${controller.velocity.value.toStringAsFixed(2)}, Angle: ${controller.angle.value.toStringAsFixed(2)}'),
+                        'Velocity: ${controller.velocity.value.toStringAsFixed(2)}, Angle: ${controller.angle.value.toStringAsFixed(2)} Speed: ${controller.speed.value.toStringAsFixed(2)},',
+                      ),
                     ],
                   ),
                 ],
