@@ -205,6 +205,9 @@ class ParabolaView extends GetView<ParabolaController> {
                         child: Column(
                           children: [
                             Text(
+                              'Time in Seconds: ${controller.timeInSeconds.value.toStringAsFixed(2)}',
+                            ),
+                            Text(
                               'Distance X: ${controller.x.value.toStringAsFixed(2)}',
                             ),
                             Text(

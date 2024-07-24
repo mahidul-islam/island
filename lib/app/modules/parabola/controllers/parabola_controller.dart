@@ -14,8 +14,8 @@ class ParabolaController extends GetxController {
   final RxDouble speedY = 0.0.obs;
 
   final RxDouble currentAngle = 0.0.obs;
+  final RxDouble timeInSeconds = 0.0.obs;
 
-  final RxInt tickCount = 0.obs;
   final RxBool isPlaying = false.obs;
   final Rx<DateTime> initialDuration = DateTime.now().obs;
 
@@ -30,6 +30,8 @@ class ParabolaController extends GetxController {
     speedX.value = 0;
     speedY.value = 0;
     currentSpeed.value = 0;
+    currentAngle.value = 0;
+    timeInSeconds.value = 0;
   }
 
   void onVelocitySliderChange(double v) {
@@ -66,7 +68,7 @@ class ParabolaController extends GetxController {
     // double timeFromTick =
     //     ((timer.tick - tickCount.value) * (1000 ~/ 60)).toDouble() / 1000;
 
-    double timeInSeconds = DateTime.now()
+    timeInSeconds.value = DateTime.now()
             .difference(initialDuration.value)
             .inMilliseconds
             .toDouble() /
@@ -74,11 +76,11 @@ class ParabolaController extends GetxController {
 
     // print('$timeInSeconds, '); //$timeFromTick
 
-    timeInSeconds = timeInSeconds * simulationSpeed.value;
+    timeInSeconds.value = timeInSeconds.value * simulationSpeed.value;
 
     double radian = angle.value * (pi / 180);
 
-    x.value = initialVelocity.value * cos(radian) * timeInSeconds;
+    x.value = initialVelocity.value * cos(radian) * timeInSeconds.value;
 
     double b = tan(radian);
     double c = 9.80665 /
@@ -90,7 +92,7 @@ class ParabolaController extends GetxController {
 
     speedX.value = initialVelocity.value * cos(radian);
     speedY.value =
-        (initialVelocity.value * sin(radian)) - (9.80665 * timeInSeconds);
+        (initialVelocity.value * sin(radian)) - (9.80665 * timeInSeconds.value);
 
     currentSpeed.value =
         sqrt((speedX.value * speedX.value) + (speedY.value * speedY.value));
@@ -111,7 +113,6 @@ class ParabolaController extends GetxController {
     isPlaying.value = !isPlaying.value;
 
     if (isPlaying.value) {
-      tickCount.value = timer?.tick ?? 0;
       initialDuration.value = DateTime.now();
     }
   }
