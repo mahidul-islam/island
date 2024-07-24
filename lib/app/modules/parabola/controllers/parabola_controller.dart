@@ -5,12 +5,19 @@ import 'package:get/get.dart';
 class ParabolaController extends GetxController {
   final count = 0.obs;
 
-  final RxDouble velocity = 140.0.obs;
+  final RxDouble initialVelocity = 100.0.obs;
   final RxDouble angle = 45.0.obs;
-  final RxDouble speed = 0.5.obs;
+  final RxDouble simulationSpeed = 0.10.obs;
+
+  final RxDouble currentSpeed = 0.0.obs;
+  final RxDouble speedX = 0.0.obs;
+  final RxDouble speedY = 0.0.obs;
+
+  final RxDouble currentAngle = 0.0.obs;
 
   final RxInt tickCount = 0.obs;
   final RxBool isPlaying = false.obs;
+  final Rx<DateTime> initialDuration = DateTime.now().obs;
 
   final RxDouble x = 0.0.obs;
   final RxDouble y = 0.0.obs;
@@ -20,10 +27,13 @@ class ParabolaController extends GetxController {
     isPlaying.value = false;
     x.value = 0;
     y.value = 0;
+    speedX.value = 0;
+    speedY.value = 0;
+    currentSpeed.value = 0;
   }
 
   void onVelocitySliderChange(double v) {
-    velocity.value = v;
+    initialVelocity.value = v;
   }
 
   void onAngleSliderChange(double a) {
@@ -31,7 +41,7 @@ class ParabolaController extends GetxController {
   }
 
   void onSpeedSliderChange(double s) {
-    speed.value = s;
+    simulationSpeed.value = s;
   }
 
   @override
@@ -53,22 +63,42 @@ class ParabolaController extends GetxController {
       return;
     }
 
-    double time =
-        ((timer.tick - tickCount.value) * (1000 ~/ 60)).toDouble() / 1000;
+    // double timeFromTick =
+    //     ((timer.tick - tickCount.value) * (1000 ~/ 60)).toDouble() / 1000;
 
-    time = time * speed.value;
+    double timeInSeconds = DateTime.now()
+            .difference(initialDuration.value)
+            .inMilliseconds
+            .toDouble() /
+        1000;
+
+    print('$timeInSeconds, '); //$timeFromTick
+
+    timeInSeconds = timeInSeconds * simulationSpeed.value;
 
     double radian = angle.value * (pi / 180);
 
-    x.value += (velocity.value * cos(radian)) * time;
+    x.value = (initialVelocity.value * cos(radian)) * timeInSeconds;
 
     double b = tan(radian);
     double c = (9.80665) /
-        ((velocity.value * velocity.value) * (cos(radian) * cos(radian)));
+        (2 *
+            ((initialVelocity.value * initialVelocity.value) *
+                (cos(radian) * cos(radian))));
 
     y.value = (b * x.value) - (c * (x.value * x.value));
 
-    // print('time: $time x: ${x.value},y: ${y.value}');
+    speedX.value = initialVelocity.value * cos(radian);
+    speedY.value =
+        (initialVelocity.value * sin(radian)) - (9.80665 * timeInSeconds);
+
+    currentSpeed.value =
+        sqrt((speedX.value * speedX.value) + (speedY.value * speedY.value));
+
+    final double currentRadian = atan((speedY.value / speedX.value));
+    currentAngle.value = currentRadian * (pi / 180);
+
+    print('time: $timeInSeconds x: ${x.value},y: ${y.value}');
   }
 
   @override
@@ -82,6 +112,7 @@ class ParabolaController extends GetxController {
 
     if (isPlaying.value) {
       tickCount.value = timer?.tick ?? 0;
+      initialDuration.value = DateTime.now();
     }
   }
 }

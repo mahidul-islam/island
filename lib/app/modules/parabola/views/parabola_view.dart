@@ -68,7 +68,7 @@ class ParabolaView extends GetView<ParabolaController> {
                               child: Slider(
                                 max: 1000,
                                 min: 0,
-                                value: controller.velocity.value,
+                                value: controller.initialVelocity.value,
                                 onChanged: controller.onVelocitySliderChange,
                               ),
                             ),
@@ -106,7 +106,7 @@ class ParabolaView extends GetView<ParabolaController> {
                               child: Slider(
                                 max: 1,
                                 min: 0.001,
-                                value: controller.speed.value,
+                                value: controller.simulationSpeed.value,
                                 onChanged: controller.onSpeedSliderChange,
                               ),
                             ),
@@ -114,7 +114,7 @@ class ParabolaView extends GetView<ParabolaController> {
                         ),
                       ),
                       Text(
-                        'Velocity: ${controller.velocity.value.toStringAsFixed(2)}, Angle: ${controller.angle.value.toStringAsFixed(2)} Speed: ${controller.speed.value.toStringAsFixed(2)},',
+                        'Velocity: ${controller.initialVelocity.value.toStringAsFixed(2)}, Angle: ${controller.angle.value.toStringAsFixed(2)} Speed: ${controller.simulationSpeed.value.toStringAsFixed(2)},',
                       ),
                     ],
                   ),
@@ -139,6 +139,63 @@ class ParabolaView extends GetView<ParabolaController> {
                           decoration: const BoxDecoration(
                             color: Colors.black,
                             shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: controller.x.value + 50,
+                        bottom: controller.y.value,
+                        child: SizedBox(
+                          child: Column(
+                            children: [
+                              const Row(
+                                children: [
+                                  Text('Vx:'),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                controller.speedX.value.toStringAsFixed(2),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: controller.x.value,
+                        bottom: controller.y.value + 50,
+                        child: RotatedBox(
+                          quarterTurns: 3,
+                          child: SizedBox(
+                            child: Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text('Vy:'),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  controller.speedY.value.toStringAsFixed(2),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
