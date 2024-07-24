@@ -96,7 +96,7 @@ class ParabolaController extends GetxController {
         sqrt((speedX.value * speedX.value) + (speedY.value * speedY.value));
 
     final double currentRadian = atan((speedY.value / speedX.value));
-    currentAngle.value = currentRadian * (pi / 180);
+    currentAngle.value = currentRadian * (180 / pi);
 
     // print('time: $timeInSeconds x: ${x.value},y: ${y.value}');
   }

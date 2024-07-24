@@ -199,6 +199,23 @@ class ParabolaView extends GetView<ParabolaController> {
                           ),
                         ),
                       ),
+                      Positioned(
+                        left: 0,
+                        top: 0,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Distance X: ${controller.x.value.toStringAsFixed(2)}',
+                            ),
+                            Text(
+                              'Height y: ${controller.y.value.toStringAsFixed(2)}',
+                            ),
+                            Text(
+                              'Angle: ${controller.currentAngle.value.toStringAsFixed(2)}',
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
