@@ -68,7 +68,7 @@ class ParabolaController extends GetxController {
 
     y.value = (b * x.value) - (c * (x.value * x.value));
 
-    // print('x: ${x.value},y: ${y.value}');
+    // print('time: $time x: ${x.value},y: ${y.value}');
   }
 
   @override

@@ -9,10 +9,15 @@ class HomeController extends GetxController {
 
   RxList<Offset?> points = <Offset?>[].obs;
 
+  ScrollController scrollController = ScrollController();
+
   @override
   void onReady() async {
     super.onReady();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      calculatePositions();
+    });
+    scrollController.addListener(() {
       calculatePositions();
     });
   }
