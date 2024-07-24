@@ -29,7 +29,7 @@ class HomeController extends GetxController {
     final RenderBox? renderBox =
         key.currentContext?.findRenderObject() as RenderBox?;
     Offset? offset = renderBox?.localToGlobal(Offset.zero);
-    print(offset.toString());
+    // print(offset.toString());
     return offset;
   }
 }

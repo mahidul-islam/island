@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:island/app/routes/app_pages.dart';
 
 import '../controllers/parabola_controller.dart';
 
@@ -30,12 +29,101 @@ class ParabolaView extends GetView<ParabolaController> {
               // ),
             ],
           ),
-          appBar: AppBar(title: const Text("Parabola")),
-          body: Center(
-            child: Text(
-              controller.count.value.toString(),
-              style: const TextStyle(fontSize: 20),
-            ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: Get.width),
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.restore_rounded,
+                      size: 50,
+                    ),
+                    onPressed: controller.reset,
+                  ),
+                  const SizedBox(width: 20),
+                  IconButton(
+                    icon: Icon(
+                      controller.isPlaying.value
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                      size: 50,
+                    ),
+                    onPressed: controller.togglePlayPause,
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: Get.width * 2 / 3,
+                        child: Row(
+                          children: [
+                            const Text('Velocity: '),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Slider(
+                                max: 1000,
+                                min: 0,
+                                value: controller.velocity.value,
+                                onChanged: controller.onVelocitySliderChange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 2 / 3,
+                        child: Row(
+                          children: [
+                            const Text('Angle: '),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Slider(
+                                max: 90,
+                                min: 0,
+                                value: controller.angle.value,
+                                onChanged: controller.onAngleSliderChange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                          'Velocity: ${controller.velocity.value.toStringAsFixed(2)}, Angle: ${controller.angle.value.toStringAsFixed(2)}'),
+                    ],
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  width: Get.width,
+                  color: Colors.lightGreenAccent.withOpacity(0.2),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: controller.x.value,
+                        bottom: controller.y.value,
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         );
       },

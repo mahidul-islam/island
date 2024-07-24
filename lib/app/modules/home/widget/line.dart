@@ -23,10 +23,10 @@ class LinePainter extends CustomPainter {
   }
 
   Offset _globalToLocal(Offset globalOffset) {
-    print(globalOffset.toString());
+    // print(globalOffset.toString());
     final renderObject = key.currentContext?.findRenderObject() as RenderBox;
     final offset = renderObject.globalToLocal(globalOffset);
-    print(offset.toString());
+    // print(offset.toString());
     return offset;
   }
 
