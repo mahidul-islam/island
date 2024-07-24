@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:island/app/modules/home/widget/line.dart';
+import 'package:island/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -11,10 +12,16 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            controller.calculatePositions();
-          },
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                Get.offAndToNamed(Routes.PARABOLA);
+              },
+              child: const Icon(Icons.skip_next_rounded),
+            ),
+          ],
         ),
         appBar: AppBar(title: const Text("Line Between Widgets")),
         body: Row(
