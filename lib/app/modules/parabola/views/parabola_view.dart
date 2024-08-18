@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:island/app/routes/app_pages.dart';
 
 import '../controllers/parabola_controller.dart';
 
@@ -16,9 +17,10 @@ class ParabolaView extends GetView<ParabolaController> {
             children: [
               FloatingActionButton(
                 onPressed: () {
+                  Get.toNamed(Routes.HOME);
                   Get.back();
                 },
-                child: const Icon(Icons.skip_previous_rounded),
+                child: const Icon(Icons.skip_next_rounded),
               ),
               // SizedBox(width: 20,),
               // FloatingActionButton(

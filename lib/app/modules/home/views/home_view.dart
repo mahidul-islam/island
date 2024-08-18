@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:island/app/modules/home/widget/line.dart';
-import 'package:island/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -17,9 +16,9 @@ class HomeView extends GetView<HomeController> {
           children: [
             FloatingActionButton(
               onPressed: () {
-                Get.toNamed(Routes.PARABOLA);
+                Get.back();
               },
-              child: const Icon(Icons.skip_next_rounded),
+              child: const Icon(Icons.skip_previous_rounded),
             ),
           ],
         ),
